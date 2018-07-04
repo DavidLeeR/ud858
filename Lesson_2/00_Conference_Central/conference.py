@@ -116,7 +116,7 @@ class ConferenceApi(remote.Service):
             path='profile', http_method='POST', name='saveProfile')
     def saveProfile(self, request):
         """Update & return user profile."""
-        return self._doProfile()
+        return self._doProfile(request)
 
 
 # registers API
