@@ -127,8 +127,8 @@ class ConferenceApi(remote.Service):
         return self._doProfile(request)
 
 
-# - - - Conference objects - - - - - - - - - - - - - - - - - - -
-def _copyConferenceToForm(self, conf, displayName):
+    # - - - Conference objects - - - - - - - - - - - - - - - - - - -
+    def _copyConferenceToForm(self, conf, displayName):
         """Copy relevant fields from Conference to ConferenceForm."""
         cf = ConferenceForm()
         for field in cf.all_fields():
