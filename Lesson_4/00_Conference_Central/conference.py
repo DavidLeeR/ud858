@@ -201,8 +201,9 @@ class ConferenceApi(remote.Service):
 
         # create Conference & return (modified) ConferenceForm
         Conference(**data).put()
-
         return request
+
+
     @endpoints.method(message_types.VoidMessage, ConferenceForms,
         path='getConferencesCreated',
         http_method='POST', name='getConferencesCreated')
@@ -261,6 +262,31 @@ class ConferenceApi(remote.Service):
         return ConferenceForms(
             items=[self._copyConferenceToForm(conf, "") \
             for conf in conferences]
+        )
+    
+    @endpoints.method(message_types.VoidMessage, ConferenceForms,
+        path='filterPlayground',
+        http_method='GET', name='filterPlayground')
+    def filterPlayground(self, request):
+        q = Conference.query()
+        # simple filter usage:
+        # q = q.filter(Conference.city == "Paris")
+
+        q = q.filter(Conference.city == "London")
+        
+        #q = q.filter(Conference.topics == "Medical Innovations")
+
+        #q = q.filter(Conference.month == 6)
+
+        # TODO
+        # add 2 filters:
+        # 1: city equals to London
+        # 2: topic equals "Medical Innovations"
+
+
+
+        return ConferenceForms(
+            items=[self._copyConferenceToForm(conf, "") for conf in q]
         )
 
 # TODO
